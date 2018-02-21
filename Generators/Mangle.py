@@ -86,7 +86,12 @@ def main(*args):
         # you may also want to remove whitespace characters like `\n` at the end of each line
             dates = [x.strip() for x in content] 
         except:
-            dates = DATES.split(",")
+            if ":" in DATES:
+                dates = DATES.split(':')
+                for d in range(int(dates[0]),int(dates[1])):
+                    dates.append(d)
+            else:
+                dates = DATES.split(",")
         #words = args[0][1:]
         for word in words:
             if len(word)>0:
