@@ -51,7 +51,7 @@ def printHelp():
     print("Options:")
     print()
     print("-w WORDS,--words=WORDS    List of words separated by comma, or file with list of words")
-    print("-d DATES,--dates=DATES    List of relevant dates or numbers separated by comma, or file with list of dates")
+    print("-d DATES,--dates=DATES    List of relevant dates or numbers separated by comma, or file with list of dates.  You can also use the following format for a range of dates: DATE:DATE")
     print("-o OUTPUT,--output=OUTPUT File to write password list to, or ignore for stdout")
     print()
 def main(*args):
