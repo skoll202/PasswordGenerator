@@ -88,8 +88,9 @@ def main(*args):
             dates = DATES.split(",")
         #words = args[0][1:]
         for word in words:
-            newWords = mangle(word.lower())
-            kindofFinalList+=newWords
+            if len(word)>0:
+                newWords = mangle(word.lower())
+                kindofFinalList+=newWords
         for word in kindofFinalList:
             finalList.append(word)
         for word in kindofFinalList:
