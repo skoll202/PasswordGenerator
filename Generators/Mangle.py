@@ -41,55 +41,67 @@ def addDates(word,dates):
     list = []
     for d in dates:
         list.append("%s%s"%(word,d))
-    return list        
+    return list    
 
+def printHelp():
+    print()
+    print("Options:")
+    print()
+    print("-w WORDS,--words=WORDS    List of words separated by comma, or file with list of words")
+    print("-d DATES,--dates=DATES    List of relevant dates or numbers separated by comma, or file with list of dates")
+    print("-o OUTPUT,--output=OUTPUT File to write password list to, or ignore for stdout")
+    print()
 def main(*args):
-    OUTPUT = ''
-    WORDS=''
-    DATES=''
-    options, remainder = getopt.getopt(sys.argv[1:], 'o:w:d', 
-                                       ['output=','words=','dates='])
-    print( 'OPTIONS   :', options)
-
-    for opt, arg in options:
-        if opt in ('-o', '--output'):
-            OUTPUT = arg
-        elif opt in ('-w', '--words'):
-            WORDS=arg
-        elif opt in ('-d', '--dates'):
-            DATES = arg
-    kindofFinalList = []
-    finalList = []
     try:
-        with open(WORDS) as f:
-            content = f.readlines()
-    # you may also want to remove whitespace characters like `\n` at the end of each line
-        words = [x.strip() for x in content] 
-    except:
-        words = WORDS.split(",")
-    try:
-        with open(DATES) as f:
-            content = f.readlines()
-    # you may also want to remove whitespace characters like `\n` at the end of each line
-        dates = [x.strip() for x in content] 
-    except:
-        dates = DATES.split(",")
-    #words = args[0][1:]
-    for word in words:
-        newWords = mangle(word)
-        kindofFinalList+=newWords
-    for word in kindofFinalList:
-        finalList.append(word)
-    for word in kindofFinalList:
-        finalList+=addDates(word,dates)
-    if OUTPUT!='':
+        OUTPUT = ''
+        WORDS=''
+        DATES=''
+        options, remainder = getopt.getopt(sys.argv[1:], 'o:w:d:h', 
+                                           ['output=','words=','dates=','help'])
+    
+        for opt, arg in options:
+            if opt in ('-o', '--output'):
+                OUTPUT = arg
+            elif opt in ('-w', '--words'):
+                WORDS=arg
+            elif opt in ('-d', '--dates'):
+                DATES = arg
+            else:
+                printHelp()
+        kindofFinalList = []
+        finalList = []
         try:
-            outFile = open(OUTPUT, 'w')
-            for word in finalList:
-                outFile.write("%s\n" % word)
+            with open(WORDS) as f:
+                content = f.readlines()
+        # you may also want to remove whitespace characters like `\n` at the end of each line
+            words = [x.strip() for x in content] 
         except:
-            for word in finalList:
-                print(word)
-    return finalList
+            words = WORDS.split(",")
+        try:
+            with open(DATES) as f:
+                content = f.readlines()
+        # you may also want to remove whitespace characters like `\n` at the end of each line
+            dates = [x.strip() for x in content] 
+        except:
+            dates = DATES.split(",")
+        #words = args[0][1:]
+        for word in words:
+            newWords = mangle(word)
+            kindofFinalList+=newWords
+        for word in kindofFinalList:
+            finalList.append(word)
+        for word in kindofFinalList:
+            finalList+=addDates(word,dates)
+        if OUTPUT!='':
+            try:
+                outFile = open(OUTPUT, 'w')
+                for word in finalList:
+                    outFile.write("%s\n" % word)
+            except:
+                for word in finalList:
+                    print(word)
+        return finalList
+    except:
+        printHelp()
 
 main(sys.argv)
