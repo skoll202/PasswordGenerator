@@ -10,7 +10,8 @@ import getopt
 rule = {
     'a':['@','4'],'b':[],'c':[],'d':[],'e':['3'],'f':[],'g':[],'h':[],'i':['1','!'],
     'j':[],'k':[],'l':['1','!'],'m':[],'n':[],'o':['0'],'p':[],'q':[],'r':[],
-    's':['$'],'t':['7'],'u':[],'v':[],'w':[],'x':[],'y':[],'z':[]}
+    's':['$'],'t':['7'],'u':[],'v':[],'w':[],'x':[],'y':[],'z':[],'1':['!'],
+    '2':[],'3':[],'4':[],'5':[],'6':[],'7':[],'8':[],'9':[],'0':[], ' ':[]}
 
 
 
@@ -87,8 +88,9 @@ def main(*args):
             dates = DATES.split(",")
         #words = args[0][1:]
         for word in words:
-            newWords = mangle(word)
-            kindofFinalList+=newWords
+            if len(word)>0:
+                newWords = mangle(word.lower())
+                kindofFinalList+=newWords
         for word in kindofFinalList:
             finalList.append(word)
         for word in kindofFinalList:
