@@ -109,6 +109,9 @@ def main(*args):
             except:
                 for word in finalList:
                     print(word)
+        else:
+            for word in finalList:
+                print(word)
         return finalList
     except:
         printHelp()
