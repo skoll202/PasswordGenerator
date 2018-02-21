@@ -2,7 +2,7 @@
 '''
 Created on Feb 16, 2018
 
-@author: ncarlson
+@author: skoll202
 '''
 import sys
 import getopt
